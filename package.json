@@ -1,5 +1,5 @@
 {
-  "name": "Scrib",
+  "name": "retro-rss-aggregator",
   "version": "1.0.0",
   "description": "A Windows 98 style RSS feed aggregator built with Electron",
   "main": "main.js",
@@ -9,8 +9,8 @@
     "build": "electron-builder",
     "pack": "electron-builder --dir"
   },
-  "keywords": ["electron", "rss", "aggregator", "retro", "windows98,"],
-  "author": "Hidden Layer Media",
+  "keywords": ["electron", "rss", "aggregator", "retro", "windows98"],
+  "author": "RSS Aggregator",
   "license": "MIT",
   "devDependencies": {
     "electron": "^28.0.0",
