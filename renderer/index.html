@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro RSS Aggregator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-win98">
+    <div class="app-container">
+        <!-- Header/Toolbar -->
+        <div class="toolbar">
+            <div class="toolbar-group">
+                <button class="toolbar-btn" id="btn-new-feed" title="Add New Feed">
+                    <span class="btn-icon">+</span>
+                    <span class="btn-text">New Feed</span>
+                </button>
+                <button class="toolbar-btn" id="btn-refresh" title="Refresh All Feeds">
+                    <span class="btn-icon">↻</span>
+                    <span class="btn-text">Refresh</span>
+                </button>
+                <div class="toolbar-separator"></div>
+                <button class="toolbar-btn" id="btn-new-group" title="Create New Group">
+                    <span class="btn-icon">□</span>
+                    <span class="btn-text">New Group</span>
+                </button>
+            </div>
+            <div class="toolbar-group">
+                <select class="theme-selector" id="theme-selector">
+                    <option value="win98">Windows 98</option>
+                    <option value="win95">Windows 95</option>
+                    <option value="green">Classic Green</option>
+                    <option value="amber">Amber Terminal</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-layout">
+            <!-- Sidebar -->
+            <div class="sidebar" id="sidebar">
+                <div class="sidebar-header">
+                    <h3>Feed Groups</h3>
+                    <button class="sidebar-toggle" id="sidebar-toggle">◀</button>
+                </div>
+                
+                <div class="feed-tree" id="feed-tree">
+                    <div class="feed-group expanded" data-group="all">
+                        <div class="group-header">
+                            <span class="group-expand">▼</span>
+                            <span class="group-icon">📁</span>
+                            <span class="group-name">All Feeds</span>
+                            <span class="unread-count">0</span>
+                        </div>
+                        <div class="group-feeds">
+                            <div class="feed-item sample-feed" data-feed="sample">
+                                <span class="feed-icon">📰</span>
+                                <span class="feed-name">Sample News Feed</span>
+                                <span class="feed-unread">5</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="feed-group" data-group="tech">
+                        <div class="group-header">
+                            <span class="group-expand">▶</span>
+                            <span class="group-icon">📁</span>
+                            <span class="group-name">Technology</span>
+                            <span class="unread-count">0</span>
+                        </div>
+                        <div class="group-feeds" style="display: none;">
+                        </div>
+                    </div>
+                    
+                    <div class="feed-group" data-group="news">
+                        <div class="group-header">
+                            <span class="group-expand">▶</span>
+                            <span class="group-icon">📁</span>
+                            <span class="group-name">News</span>
+                            <span class="unread-count">0</span>
+                        </div>
+                        <div class="group-feeds" style="display: none;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar Status -->
+                <div class="sidebar-status">
+                    <div class="status-info">
+                        <div class="status-line">
+                            <span class="status-label">Total Feeds:</span>
+                            <span class="status-value" id="total-feeds">1</span>
+                        </div>
+                        <div class="status-line">
+                            <span class="status-label">Unread Items:</span>
+                            <span class="status-value" id="total-unread">5</span>
+                        </div>
+                        <div class="status-line">
+                            <span class="status-label">Last Update:</span>
+                            <span class="status-value" id="last-update">Never</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Tab Bar -->
+                <div class="tab-bar" id="tab-bar">
+                    <div class="tab active" data-tab="articles">
+                        <span class="tab-text">Articles</span>
+                        <button class="tab-close">×</button>
+                    </div>
+                    <div class="tab" data-tab="feed-settings">
+                        <span class="tab-text">Feed Settings</span>
+                        <button class="tab-close">×</button>
+                    </div>
+                    <button class="new-tab-btn" id="new-tab-btn">+</button>
+                </div>
+
+                <!-- Tab Panels -->
+                <div class="tab-panels">
+                    <!-- Articles Panel -->
+                    <div class="tab-panel active" id="panel-articles">
+                        <div class="articles-layout">
+                            <!-- Article List -->
+                            <div class="article-list">
+                                <div class="list-header">
+                                    <div class="list-controls">
+                                        <button class="list-btn" id="mark-all-read">Mark All Read</button>
+                                        <button class="list-btn" id="show-unread">Unread Only</button>
+                                        <input type="text" class="search-box" placeholder="Search articles..." id="search-articles">
+                                    </div>
+                                </div>
+                                
+                                <div class="articles-container" id="articles-container">
+                                    <!-- Sample Articles -->
+                                    <div class="article-item unread" data-article="1">
+                                        <div class="article-header">
+                                            <span class="article-status">●</span>
+                                            <span class="article-title">Sample Article: Technology Advances in 2025</span>
+                                            <span class="article-date">2025-06-08</span>
+                                        </div>
+                                        <div class="article-meta">
+                                            <span class="article-source">Sample News Feed</span>
+                                            <span class="article-author">John Doe</span>
+                                        </div>
+                                        <div class="article-preview">
+                                            This is a sample article preview. It shows how articles will appear in the RSS aggregator with proper formatting and metadata display...
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="article-item" data-article="2">
+                                        <div class="article-header">
+                                            <span class="article-status">○</span>
+                                            <span class="article-title">Another Sample: Windows 98 Nostalgia</span>
+                                            <span class="article-date">2025-06-07</span>
+                                        </div>
+                                        <div class="article-meta">
+                                            <span class="article-source">Sample News Feed</span>
+                                            <span class="article-author">Jane Smith</span>
+                                        </div>
+                                        <div class="article-preview">
+                                            Remember the good old days of Windows 98? This retro RSS reader brings back those memories with authentic styling...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Article Reader -->
+                            <div class="article-reader" id="article-reader">
+                                <div class="reader-header">
+                                    <h2 class="reader-title">Select an article to read</h2>
+                                    <div class="reader-controls">
+                                        <button class="reader-btn" id="open-original">Open Original</button>
+                                        <button class="reader-btn" id="mark-read">Mark Read</button>
+                                        <button class="reader-btn" id="save-article">Save</button>
+                                    </div>
+                                </div>
+                                <div class="reader-content">
+                                    <div class="reader-placeholder">
+                                        <div class="placeholder-icon">📖</div>
+                                        <p>Welcome to Retro RSS Aggregator!</p>
+                                        <p>Select an article from the list to start reading.</p>
+                                        <div class="placeholder-help">
+                                            <h4>Quick Start:</h4>
+                                            <ul>
+                                                <li>• Click "New Feed" to add RSS feeds</li>
+                                                <li>• Organize feeds into groups</li>
+                                                <li>• Use keyboard shortcuts for quick navigation</li>
+                                                <li>• Switch themes from the dropdown</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feed Settings Panel -->
+                    <div class="tab-panel" id="panel-feed-settings">
+                        <div class="settings-container">
+                            <h2>Feed Management</h2>
+                            
+                            <div class="settings-section">
+                                <h3>Add New Feed</h3>
+                                <div class="form-group">
+                                    <label for="feed-url">RSS Feed URL:</label>
+                                    <input type="url" id="feed-url" placeholder="https://example.com/rss.xml" class="text-input">
+                                </div>
+                                <div class="form-group">
+                                    <label for="feed-name">Feed Name (optional):</label>
+                                    <input type="text" id="feed-name" placeholder="My Favorite Blog" class="text-input">
+                                </div>
+                                <div class="form-group">
+                                    <label for="feed-group">Group:</label>
+                                    <select id="feed-group" class="select-input">
+                                        <option value="all">All Feeds</option>
+                                        <option value="tech">Technology</option>
+                                        <option value="news">News</option>
+                                    </select>
+                                </div>
+                                <button class="settings-btn" id="add-feed-btn">Add Feed</button>
+                            </div>
+
+                            <div class="settings-section">
+                                <h3>Manage Groups</h3>
+                                <div class="form-group">
+                                    <label for="new-group">New Group Name:</label>
+                                    <input type="text" id="new-group" placeholder="Entertainment" class="text-input">
+                                    <button class="settings-btn" id="create-group-btn">Create Group</button>
+                                </div>
+                            </div>
+
+                            <div class="settings-section">
+                                <h3>Import/Export</h3>
+                                <div class="import-export">
+                                    <button class="settings-btn" id="import-opml">Import OPML</button>
+                                    <button class="settings-btn" id="export-opml">Export OPML</button>
+                                </div>
+                            </div>
+
+                            <div class="settings-section">
+                                <h3>Feed List</h3>
+                                <div class="feed-management" id="feed-management">
+                                    <div class="feed-mgmt-item">
+                                        <div class="feed-mgmt-info">
+                                            <strong>Sample News Feed</strong><br>
+                                            <small>https://example.com/feed.xml</small>
+                                        </div>
+                                        <div class="feed-mgmt-controls">
+                                            <button class="mgmt-btn">Edit</button>
+                                            <button class="mgmt-btn danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-section">
+                <span id="status-text">Ready</span>
+            </div>
+            <div class="status-section">
+                <span id="connection-status">Offline</span>
+            </div>
+            <div class="status-section">
+                <span id="memory-usage">Memory: 45MB</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Dialogs -->
+    <div class="modal-overlay" id="modal-overlay" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 id="modal-title">Dialog</h3>
+                <button class="modal-close" id="modal-close">×</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <p>Modal content goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn" id="modal-ok">OK</button>
+                <button class="modal-btn" id="modal-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
